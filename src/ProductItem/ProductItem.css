@@ -1,0 +1,26 @@
+.ProductItem {
+    margin: auto;
+    margin-top: 80px;
+}
+
+.ProductItem--image img {
+    height: 480px;
+    margin: auto;
+}
+
+.ProductItem--body {
+    font-size: 16px;
+    word-wrap: break-word;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.ProductItem--AddToCart {
+    margin: 20px;
+}
+
+.VariantsSelectors {
+    text-align: left;
+    width: 200px;
+    margin: auto;
+}
