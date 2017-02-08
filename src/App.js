@@ -43,7 +43,7 @@ class App extends Component {
     const { quantity, cartItems } = this.state
 
     this.setState({
-      cartItems: cartItems + parseInt(quantity)
+      cartItems: cartItems + parseInt(quantity, 10)
     })
   }
 
