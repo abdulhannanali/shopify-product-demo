@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import VariantsSelector from './VariantsSelector'
 import AddToCart from '../AddToCart'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 /**
  * ProductItem
  * Displays the ProductItem
@@ -40,6 +42,17 @@ export default class ProductItem extends Component {
     }
   }
 
+  /**
+   * onAddCart
+   * adds items to cart and calls this function handler along with information
+   */
+  onAddCart (event) {
+    const { onAddCart } = this.props
+    if (onAddCart) {
+      onAddCart(event)
+    }
+  }
+
   render () {
     const { product = {}, checkoutUrl } = this.props
     let displayImage
@@ -55,7 +68,15 @@ export default class ProductItem extends Component {
       <div className="ProductItem">
         <div className="row">
           <div className="ProductItem--image">
-            <img className="img-responsive" src={displayImage && displayImage.src} alt={product.title} />
+            <ReactCSSTransitionGroup 
+              transitionName="example"
+              transitionAppear={true}
+              transitionEnter={true}
+              transitionEnterTimeout={500}
+              transitionAppearTimeout={500}
+              transitionLeave={false}>
+              <img className="img-responsive" key={displayImage && displayImage.src} src={displayImage && displayImage.src} alt={product.title} />
+            </ReactCSSTransitionGroup>
           </div>
           <div className="ProductItem--description">
             <h2>{product.productTitle }</h2>
@@ -74,7 +95,8 @@ export default class ProductItem extends Component {
             <AddToCart available={product.available} 
                        exists={product.exists}
                        onChangeQuantity={this.onChangeQuantity.bind(this)} 
-                       checkoutUrl={checkoutUrl} />
+                       checkoutUrl={checkoutUrl}
+                       onAddCart={this.onAddCart.bind(this)} />
           </div>
         </div>
       </div>
@@ -86,7 +108,6 @@ const StockLabel = ({available, exists}) => {
   const stockColor = available ? 'green' : 'red'
   let stockText
 
-  console.log(available, exists)
   if (exists && available) {
     stockText = 'In Stock'
   } else if (exists && !available) {

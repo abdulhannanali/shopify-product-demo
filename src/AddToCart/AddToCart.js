@@ -8,6 +8,7 @@ export default class AddToCart extends Component {
     // this.generateCheckoutUrl = this.generateCheckoutUrl.bind(this)
     this.onAddCart = this.onAddCart.bind(this)
     this.onChangeQuantity = this.onChangeQuantity.bind(this)
+    this.onBuyNow = this.onBuyNow.bind(this)
 
     this.state = {
       quantity: 1
@@ -20,6 +21,7 @@ export default class AddToCart extends Component {
    */
   onChangeQuantity (event) {
     const value = event.target.value
+
     this.setState({
       quantity: value
     })
@@ -34,12 +36,16 @@ export default class AddToCart extends Component {
    * function called when the Add To Cart button is clicked
    */
   onAddCart (event) {
-    const { onAddCart, checkoutUrl } = this.props
+    const { onAddCart } = this.props
 
     if (onAddCart) {
       onAddCart(event)
     }
+  }
 
+  onBuyNow (event) {
+    const { checkoutUrl } = this.props
+    event.preventDefault()    
     window.location.href = checkoutUrl
   }
 
@@ -66,16 +72,31 @@ export default class AddToCart extends Component {
       'disabled btn-default': !exists || !available
     })
 
-    const button = (<button className={classes} onClick={this.onAddCart.bind(this)} href={checkoutUrl}>{buttonText}</button>)
+    const buyNowButton = (
+      <button className={classes} onClick={this.onBuyNow} href={checkoutUrl}>{buttonText}</button>
+    )
+
+    const addToCartButton = (
+      <button className="btn btn-default"
+              data-tip="Add To Cart is not implemented, but is here to demonstrate the use of functional handler using Fake Cart"
+              onClick={this.onAddCart}>
+                Add To Cart
+      </button>
+    )
+
     if (quantity) {
       wrapper = (
         <div className="AddToCart">
           <div className="input-group">
             <input type="number"
                    value={this.state.quantity}
-                   className="form-control" placeholder="Enter quantity here" onChange={this.onChangeQuantity} />
+                   className="form-control" 
+                   placeholder="Enter quantity here" 
+                   onChange={this.onChangeQuantity}
+            />
             <span className="input-group-btn">
-              {button}
+              {buyNowButton}
+              {addToCartButton}
             </span>
           </div>
         </div>
@@ -83,7 +104,7 @@ export default class AddToCart extends Component {
     } else {
       wrapper = (
         <div className="AddToCart">
-          {button}
+          {buyNowButton}
         </div>
       )
     }

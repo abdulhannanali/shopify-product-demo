@@ -1,22 +1,27 @@
 {
   "name": "Shopify-product-demo",
+  "homepage": "https://hannanali.tech/shopify-product-demo",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "gh-pages": "^0.12.0",
     "react-scripts": "0.8.5"
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-select": "^1.0.0-rc.3",
+    "react-tooltip": "^3.2.6",
     "shopify-buy": "^0.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "deploy": "gh-pages -d build -b gh-pages",
     "eject": "react-scripts eject"
   }
 }

@@ -4,6 +4,7 @@ import './App.css';
 import shopClient from './shopClient'
 import ProductItem from './ProductItem'
 import loader from './download.gif'
+import ReactTooltip from 'react-tooltip'
 
 class App extends Component {
   /**
@@ -19,7 +20,8 @@ class App extends Component {
       error: false,
       loading: false,
       completed: false,
-      quantity: 1
+      quantity: 1,
+      cartItems: 0
     }
 
     this.shopClient   =  shopClient
@@ -30,6 +32,19 @@ class App extends Component {
 
   componentDidMount () {
     this.fetchProduct(8566905489)
+  }
+
+  /**
+   * onAddCart
+   * Increases the count at cartItems the fake Cart simulator
+   * just for this one demo
+   */
+  onAddCart (event) {
+    const { quantity, cartItems } = this.state
+
+    this.setState({
+      cartItems: cartItems + parseInt(quantity)
+    })
   }
 
   /**
@@ -137,7 +152,6 @@ class App extends Component {
     const selectedVariant = product.selectedVariant
     const checkoutUrl = selectedVariant && selectedVariant.checkoutUrl(quantity)
 
-    console.log(quantity, checkoutUrl)
     this.setState({
       quantity,
       checkoutUrl
@@ -157,10 +171,19 @@ class App extends Component {
 
     return (
       <div className="App">
+        <ReactTooltip />
+        <div className="SampleCart"
+              data-tip="A fake cart that increments whenever Add To Cart is pressed, here for a proof of concept. Checkout App.js for more details"
+        >
+          <h3>Cart items</h3>
+          <h4>{this.state.cartItems}</h4>
+          <small>It's a fake Cart, just to represent the working of the functional handler</small>
+        </div>
         <ProductItem product={this.state.product}
                      onSelect={this.setOption.bind(this)}
                      checkoutUrl={this.state.checkoutUrl}
-                     onChangeQuantity={this.changeQuantity.bind(this)} />
+                     onChangeQuantity={this.changeQuantity.bind(this)}
+                     onAddCart={this.onAddCart.bind(this)} />
       </div>
     );
   }

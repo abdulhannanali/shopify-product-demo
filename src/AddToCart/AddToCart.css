@@ -1,4 +1,6 @@
 .AddToCart {
-    width: 40%;
+    width: 60%;
     margin: auto;
+    max-width: 250px;
+    min-width: 100px;
 }
