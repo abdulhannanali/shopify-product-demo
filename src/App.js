@@ -183,7 +183,8 @@ class App extends Component {
                      onSelect={this.setOption.bind(this)}
                      checkoutUrl={this.state.checkoutUrl}
                      onChangeQuantity={this.changeQuantity.bind(this)}
-                     onAddCart={this.onAddCart.bind(this)} />
+                     onAddCart={this.onAddCart.bind(this)}
+                     quantity={this.state.quantity} />
       </div>
     );
   }

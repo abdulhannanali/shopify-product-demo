@@ -54,7 +54,7 @@ export default class ProductItem extends Component {
   }
 
   render () {
-    const { product = {}, checkoutUrl } = this.props
+    const { product = {}, checkoutUrl, quantity } = this.props
     let displayImage
 
     if (product.image && product.image.src) {
@@ -96,7 +96,8 @@ export default class ProductItem extends Component {
                        exists={product.exists}
                        onChangeQuantity={this.onChangeQuantity.bind(this)} 
                        checkoutUrl={checkoutUrl}
-                       onAddCart={this.onAddCart.bind(this)} />
+                       onAddCart={this.onAddCart.bind(this)}
+                       quantity={quantity} />
           </div>
         </div>
       </div>

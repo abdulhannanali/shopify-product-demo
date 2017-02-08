@@ -22,10 +22,6 @@ export default class AddToCart extends Component {
   onChangeQuantity (event) {
     const value = event.target.value
 
-    this.setState({
-      quantity: value
-    })
-
     if (this.props.onChangeQuantity) {
       this.props.onChangeQuantity(value)
     }
@@ -89,7 +85,7 @@ export default class AddToCart extends Component {
         <div className="AddToCart">
           <div className="input-group">
             <input type="number"
-                   value={this.state.quantity}
+                   value={this.props.quantity}
                    className="form-control" 
                    placeholder="Enter quantity here" 
                    onChange={this.onChangeQuantity}
